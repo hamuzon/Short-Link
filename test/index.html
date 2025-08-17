@@ -1,82 +1,342 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>短縮リンク変換 / Short Link Resolver</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <title>ショートリンク作成サービス / Short Link Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="https://home.hamusata.f5.si/icon.svg" type="image/svg+xml" />
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet" />
   <style>
-    body { font-family: sans-serif; padding:2rem; max-width:600px; margin:auto; background:#fff0f6; color:#3b1f2b; }
-    h1 { text-align:center; color:#b34a2f; }
-    input, button { padding:0.8rem; font-size:1.1rem; border-radius:10px; border:2px solid #b34a2f; width:100%; margin-bottom:1rem; box-sizing:border-box; }
-    button { cursor:pointer; background:#f6c6c1; font-weight:bold; }
-    button:hover { background:#f7a6a2; color:white; }
-    p { background:#ffe4e6; padding:1rem; border-left:5px solid #b34a2f; word-break:break-word; }
-    a { color:#b34a2f; font-weight:bold; text-decoration:none; }
-    a:hover { text-decoration:underline; }
-    #copyBtn { margin-top:0.5rem; padding:0.5rem 1rem; border-radius:8px; font-size:0.9rem; }
-    #copyMsg { margin-left:0.5rem; color:green; font-weight:bold; }
+    :root {
+      --color-bg-light: #fff0f6;
+      --color-text-light: #3b1f2b;
+      --color-accent-light: #b34a2f;
+      --color-button-bg-light: #f6c6c1;
+      --color-button-hover-light: #f7a6a2;
+    }
+    body {
+      font-family: 'M PLUS Rounded 1c', 'Comic Neue', cursive, sans-serif;
+      background-color: var(--color-bg-light);
+      color: var(--color-text-light);
+      padding: 2rem;
+      max-width: 600px;
+      margin: auto;
+      line-height: 1.6;
+      box-sizing: border-box;
+    }
+    h1 {
+      text-align: center;
+      font-weight: 700;
+      font-size: 2.4rem;
+      color: var(--color-accent-light);
+      margin-bottom: 2rem;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 1.5rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+    input[type="url"] {
+      padding: 0.8rem;
+      font-size: 1.1rem;
+      border: 2px solid var(--color-accent-light);
+      border-radius: 16px;
+      width: 100%;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+    input::placeholder {
+      color: #a66a5a;
+      font-style: italic;
+    }
+    input:focus {
+      border-color: var(--color-button-bg-light);
+      background-color: #fff4f6;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(179,74,47,0.2);
+    }
+    button {
+      padding: 0.85rem 1.5rem;
+      font-size: 1.1rem;
+      background-color: var(--color-button-bg-light);
+      color: var(--color-accent-light);
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 1px 4px 8px rgba(179,74,47,0.5);
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+    button:hover {
+      background-color: var(--color-button-hover-light);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 1px 6px 12px rgba(179,74,47,0.6);
+    }
+    .secondary-button {
+      background-color: transparent;
+      color: var(--color-accent-light);
+      border: 2px dashed var(--color-accent-light);
+      box-shadow: none;
+    }
+    .secondary-button:hover {
+      background-color: #ffe9ec;
+      color: var(--color-accent-light);
+      transform: translateY(0);
+      box-shadow: none;
+    }
+    p {
+      margin-top: 1.8rem;
+      font-size: 1.15rem;
+      background-color: #ffe4e6;
+      padding: 1.1rem;
+      border-left: 10px solid var(--color-accent-light);
+      border-radius: 10px;
+      word-break: break-word;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+    #copyButton {
+      margin-top: 0.7rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.95rem;
+      border-radius: 12px;
+      width: auto;
+      display: inline-block;
+      box-shadow: 0 2px 4px rgba(179,74,47,0.3);
+    }
+    #copyMessage {
+      margin-left: 1em;
+      color: green;
+      font-weight: bold;
+      font-size: 0.9em;
+    }
+    a {
+      color: var(--color-accent-light);
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      color: var(--color-accent-light);
+      font-size: 0.9rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #1b1b1b;
+        color: #f0e9e0;
+      }
+      h1 {
+        color: #f2c9b3;
+        text-shadow: 1px 1px 0 #392f2a;
+      }
+      form {
+        background-color: rgba(27,27,27,0.8);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      }
+      input {
+        border-color: #f2c9b3;
+        background-color: #2a2723;
+        color: #f0e9e0;
+      }
+      input::placeholder {
+        color: #8c7f75;
+      }
+      input:focus {
+        border-color: #b75a42;
+        background-color: #3a372f;
+        box-shadow: 0 0 0 3px rgba(242,201,179,0.2);
+      }
+      button {
+        background-color: #b75a42;
+        color: #1b1b1b;
+        box-shadow: 1px 4px 8px rgba(242,201,179,0.5);
+      }
+      button:hover {
+        background-color: #d1734f;
+        box-shadow: 1px 6px 12px rgba(242,201,179,0.6);
+      }
+      .secondary-button {
+        border-color: #f2c9b3;
+        color: #f2c9b3;
+      }
+      .secondary-button:hover {
+        background-color: #2f2f2f;
+      }
+      p {
+        background-color: #4b3f3b;
+        border-left-color: #f2c9b3;
+        color: #f0e9e0;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      }
+      #copyButton {
+        box-shadow: 0 2px 4px rgba(242,201,179,0.3);
+      }
+      a {
+        color: #f2c9b3;
+      }
+      footer {
+        color: #f2c9b3;
+      }
+    }
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      form {
+        padding: 1rem;
+      }
+      button {
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+      }
+      p {
+        font-size: 1rem;
+        padding: 0.8rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>短縮リンク変換 / Short Link Resolver</h1>
+  <h1>🔗 ショートリンク作成サービス / Short Link Generator 🔗</h1>
 
-  <input type="text" id="shortCodeInput" placeholder="短縮コードを入力 / Enter short code">
-  <button id="generateBtn">短縮リンク生成 / Generate Short Link</button>
+  <form id="shortenForm" autocomplete="off" spellcheck="false">
+    <input type="url" name="url" placeholder="https://example.com" required aria-label="URLを入力してください / Enter URL" />
+    <button type="submit">短縮URLを作成 / Create Short URL</button>
+    <button type="button" id="resetButton" class="secondary-button" style="display:none;">🔄 リセット / Reset</button>
+  </form>
 
-  <p id="result" style="display:none;">
-    ✅ 実行場所の短縮リンク / Your Short Link: <a id="generatedLink" href="#" target="_blank" rel="noopener"></a><br>
-    <button id="copyBtn">📋 コピー / Copy</button><span id="copyMsg"></span>
+  <p id="errorMessage" style="color: red; font-weight: bold; text-align: center; margin-top: 1rem; display:none;">
+    ⚠️ <span id="errorText"></span>
   </p>
 
+  <p style="color: var(--color-accent-light); font-weight: 700; text-align: center; margin-top: 1rem; line-height: 1.4;">
+    ⚠️ 危険なリンクは管理者の判断で削除される場合があります。<br />
+    ⚠️ Dangerous links may be removed at the administrator's discretion.
+  </p>
+
+  <p id="shortUrlDisplay" style="display:none; text-align:center;">
+    ✅ 短縮URL / Short URL: <a id="shortUrlLink" href="#" target="_blank" rel="noopener"></a><br />
+    <button id="copyButton">📋 コピー / Copy</button>
+    <span id="copyMessage" aria-live="polite"></span>
+  </p>
+
+  <footer id="copyright" aria-label="著作権表示 / Copyright"></footer>
+
   <script>
-    const shortCodeInput = document.getElementById("shortCodeInput");
-    const generateBtn = document.getElementById("generateBtn");
-    const result = document.getElementById("result");
-    const generatedLink = document.getElementById("generatedLink");
-    const copyBtn = document.getElementById("copyBtn");
-    const copyMsg = document.getElementById("copyMsg");
+    document.addEventListener("DOMContentLoaded", () => {
+      const baseYear = 2025;
+      const currentYear = new Date().getFullYear();
 
-    generateBtn.addEventListener("click", () => {
-      const code = shortCodeInput.value.trim();
-      if(!code) return alert("短縮コードを入力してください / Enter short code");
+      const hostname = window.location.hostname;
+      let footerHTML = "";
 
-      // 現在の実行ドメインを取得
-      const domain = window.location.hostname;
+      if (hostname === "hamuzon.github.io") {
+        footerHTML = `&copy; ${baseYear}${currentYear > baseYear ? "–" + currentYear : ""} <a class="link" href="https://hamuzon.github.io" target="_blank" rel="noopener noreferrer">@hamuzon</a>`;
+      } else {
+        footerHTML = `&copy; ${baseYear}${currentYear > baseYear ? "–" + currentYear : ""} Short Link`;
+      }
+      document.getElementById("copyright").innerHTML = footerHTML;
 
-      // 実行場所ドメインでの短縮リンク生成（クリックすると元リンクに飛ぶ）
-      // ここで hash を使って簡易リダイレクト処理
-      const finalUrl = `#${encodeURIComponent(code)}`;
+      const form = document.getElementById("shortenForm");
+      const errorMessage = document.getElementById("errorMessage");
+      const errorText = document.getElementById("errorText");
+      const shortUrlDisplay = document.getElementById("shortUrlDisplay");
+      const shortUrlLink = document.getElementById("shortUrlLink");
+      const copyBtn = document.getElementById("copyButton");
+      const copyMsg = document.getElementById("copyMessage");
+      const resetBtn = document.getElementById("resetButton");
 
-      generatedLink.href = finalUrl;
-      generatedLink.textContent = `https://${domain}/${code}`;
-      result.style.display = "block";
-      copyMsg.textContent = "";
-    });
+      // APIの完全URL（ドメイン＋パス）
+      const API_ENDPOINT = "https://link.hamusata.f5.si/api/shorten";
 
-    copyBtn.addEventListener("click", () => {
-      if(generatedLink.href) {
-        navigator.clipboard.writeText(generatedLink.textContent).then(() => {
-          copyMsg.textContent = "コピーしました！ / Copied!";
-          setTimeout(() => copyMsg.textContent = "", 3000);
-        }).catch(() => {
-          copyMsg.textContent = "コピー失敗 / Copy failed";
-        });
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        errorMessage.style.display = "none";
+        shortUrlDisplay.style.display = "none";
+        resetBtn.style.display = "none";
+        copyMsg.textContent = "";
+
+        const url = form.url.value.trim();
+        if (!url) {
+          errorText.textContent = "URLを入力してください / Please enter a URL";
+          errorMessage.style.display = "";
+          return;
+        }
+
+        try {
+          const res = await fetch(API_ENDPOINT, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ url }),
+          });
+
+          if (!res.ok) {
+            let errMsg = "エラーが発生しました / An error occurred";
+            try {
+              const errJson = await res.json();
+              if (errJson.error) errMsg = errJson.error;
+            } catch {}
+            errorText.textContent = errMsg;
+            errorMessage.style.display = "";
+            return;
+          }
+
+          const data = await res.json();
+
+          if (data.error) {
+            errorText.textContent = data.error;
+            errorMessage.style.display = "";
+          } else if (data.shortUrl) {
+            shortUrlLink.href = data.shortUrl;
+            shortUrlLink.textContent = data.shortUrl;
+            shortUrlDisplay.style.display = "";
+            resetBtn.style.display = "";
+          } else {
+            errorText.textContent = "不明なレスポンスです / Unknown response";
+            errorMessage.style.display = "";
+          }
+        } catch (err) {
+          errorText.textContent = "通信エラーが発生しました / Network error occurred";
+          errorMessage.style.display = "";
+        }
+      });
+
+      copyBtn.addEventListener("click", () => {
+        if (shortUrlLink.href) {
+          navigator.clipboard.writeText(shortUrlLink.href).then(() => {
+            copyMsg.textContent = "コピーしました！ / Copied!";
+            setTimeout(() => (copyMsg.textContent = ""), 3000);
+          }).catch(() => {
+            copyMsg.textContent = "コピーに失敗しました / Copy failed";
+          });
+        }
+      });
+
+      resetBtn.addEventListener("click", () => {
+        form.reset();
+        shortUrlDisplay.style.display = "none";
+        resetBtn.style.display = "none";
+        errorMessage.style.display = "none";
+        copyMsg.textContent = "";
+      });
+
+      if (window.history.replaceState) {
+        window.history.replaceState({}, document.title, window.location.pathname);
       }
     });
-
-    // hash が変わったら元リンクにリダイレクト
-    window.addEventListener("hashchange", () => {
-      const code = decodeURIComponent(location.hash.slice(1));
-      if(code) {
-        window.location.href = `https://link.hamusata.f5.si/${code}`;
-      }
-    });
-
-    // ページロード時に hash があれば自動リダイレクト
-    if(location.hash){
-      const code = decodeURIComponent(location.hash.slice(1));
-      window.location.href = `https://link.hamusata.f5.si/${code}`;
-    }
   </script>
 </body>
 </html>
