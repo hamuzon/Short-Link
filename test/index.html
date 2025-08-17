@@ -7,38 +7,23 @@
   <link rel="icon" href="https://home.hamusata.f5.si/icon.svg" type="image/svg+xml" />
   <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --color-bg-light: #fff0f6;
-      --color-text-light: #3b1f2b;
-      --color-accent-light: #b34a2f;
-      --color-button-bg-light: #f6c6c1;
-      --color-button-hover-light: #f7a6a2;
-    }
-    body {
-      font-family: 'M PLUS Rounded 1c', 'Comic Neue', cursive, sans-serif;
-      background-color: var(--color-bg-light);
-      color: var(--color-text-light);
-      padding: 2rem;
-      max-width: 600px;
-      margin: auto;
-      line-height: 1.6;
-      box-sizing: border-box;
-    }
-    h1 { text-align: center; font-weight: 700; font-size: 2.4rem; color: var(--color-accent-light); margin-bottom: 2rem; }
-    form { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; background-color: rgba(255, 255, 255, 0.8); padding: 1.5rem; border-radius: 20px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
-    input[type="text"] { padding: 0.8rem; font-size: 1.1rem; border: 2px solid var(--color-accent-light); border-radius: 16px; width: 100%; box-sizing: border-box; transition: all 0.3s ease; }
-    input::placeholder { color: #a66a5a; font-style: italic; }
-    input:focus { border-color: var(--color-button-bg-light); background-color: #fff4f6; outline: none; box-shadow: 0 0 0 3px rgba(179,74,47,0.2); }
-    button { padding: 0.85rem 1.5rem; font-size: 1.1rem; background-color: var(--color-button-bg-light); color: var(--color-accent-light); border: none; border-radius: 20px; cursor: pointer; font-weight: 700; box-shadow: 1px 4px 8px rgba(179,74,47,0.5); transition: all 0.3s ease; width: 100%; }
-    button:hover { background-color: var(--color-button-hover-light); color: white; transform: translateY(-2px); box-shadow: 1px 6px 12px rgba(179,74,47,0.6); }
-    .secondary-button { background-color: transparent; color: var(--color-accent-light); border: 2px dashed var(--color-accent-light); box-shadow: none; }
-    .secondary-button:hover { background-color: #ffe9ec; color: var(--color-accent-light); transform: translateY(0); box-shadow: none; }
-    p { margin-top: 1.8rem; font-size: 1.15rem; background-color: #ffe4e6; padding: 1.1rem; border-left: 10px solid var(--color-accent-light); border-radius: 10px; word-break: break-word; box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
-    #copyButton { margin-top: 0.7rem; padding: 0.5rem 1rem; font-size: 0.95rem; border-radius: 12px; width: auto; display: inline-block; box-shadow: 0 2px 4px rgba(179,74,47,0.3); }
-    #copyMessage { margin-left: 1em; color: green; font-weight: bold; font-size: 0.9em; }
-    a { color: var(--color-accent-light); text-decoration: none; font-weight: bold; }
-    a:hover { text-decoration: underline; }
-    footer { text-align: center; margin-top: 3rem; color: var(--color-accent-light); font-size: 0.9rem; }
+    :root { --color-bg-light:#fff0f6; --color-text-light:#3b1f2b; --color-accent-light:#b34a2f; --color-button-bg-light:#f6c6c1; --color-button-hover-light:#f7a6a2; }
+    body { font-family:'M PLUS Rounded 1c','Comic Neue',cursive,sans-serif; background-color:var(--color-bg-light); color:var(--color-text-light); padding:2rem; max-width:600px; margin:auto; line-height:1.6; box-sizing:border-box; }
+    h1 { text-align:center; font-weight:700; font-size:2.4rem; color:var(--color-accent-light); margin-bottom:2rem; }
+    form { display:flex; flex-direction:column; gap:1rem; margin-top:2rem; background-color:rgba(255,255,255,0.8); padding:1.5rem; border-radius:20px; box-shadow:0 8px 16px rgba(0,0,0,0.1); }
+    input[type="text"] { padding:0.8rem; font-size:1.1rem; border:2px solid var(--color-accent-light); border-radius:16px; width:100%; box-sizing:border-box; transition:all 0.3s ease; }
+    input::placeholder { color:#a66a5a; font-style:italic; }
+    input:focus { border-color:var(--color-button-bg-light); background-color:#fff4f6; outline:none; box-shadow:0 0 0 3px rgba(179,74,47,0.2); }
+    button { padding:0.85rem 1.5rem; font-size:1.1rem; background-color:var(--color-button-bg-light); color:var(--color-accent-light); border:none; border-radius:20px; cursor:pointer; font-weight:700; box-shadow:1px 4px 8px rgba(179,74,47,0.5); transition:all 0.3s ease; width:100%; }
+    button:hover { background-color:var(--color-button-hover-light); color:white; transform:translateY(-2px); box-shadow:1px 6px 12px rgba(179,74,47,0.6); }
+    .secondary-button { background-color:transparent; color:var(--color-accent-light); border:2px dashed var(--color-accent-light); box-shadow:none; }
+    .secondary-button:hover { background-color:#ffe9ec; color:var(--color-accent-light); transform:translateY(0); box-shadow:none; }
+    p { margin-top:1.8rem; font-size:1.15rem; background-color:#ffe4e6; padding:1.1rem; border-left:10px solid var(--color-accent-light); border-radius:10px; word-break:break-word; box-shadow:0 4px 8px rgba(0,0,0,0.05); text-align:center; }
+    #copyButton { margin-top:0.7rem; padding:0.5rem 1rem; font-size:0.95rem; border-radius:12px; width:auto; display:inline-block; box-shadow:0 2px 4px rgba(179,74,47,0.3); }
+    #copyMessage { margin-left:1em; color:green; font-weight:bold; font-size:0.9em; }
+    a { color:var(--color-accent-light); text-decoration:none; font-weight:bold; }
+    a:hover { text-decoration:underline; }
+    footer { text-align:center; margin-top:3rem; color:var(--color-accent-light); font-size:0.9rem; }
   </style>
 </head>
 <body>
@@ -50,8 +35,8 @@
     <button type="button" id="resetButton" class="secondary-button" style="display:none;">🔄 リセット / Reset</button>
   </form>
 
-  <p id="shortUrlDisplay" style="display:none; text-align:center;">
-    ✅ 短縮リンク / Short Link: <a id="shortUrlLink" href="#" target="_blank" rel="noopener"></a><br />
+  <p id="shortUrlDisplay" style="display:none;">
+    ✅ 短縮リンク: <a id="shortUrlLink" href="#" target="_blank" rel="noopener"></a><br/>
     <button id="copyButton">📋 コピー / Copy</button>
     <span id="copyMessage" aria-live="polite"></span>
   </p>
@@ -63,10 +48,10 @@
       const baseYear = 2025;
       const currentYear = new Date().getFullYear();
       const hostname = window.location.hostname;
-      const footerHTML = hostname === "hamuzon.github.io"
-        ? `&copy; ${baseYear}${currentYear > baseYear ? "–" + currentYear : ""} <a href="https://hamuzon.github.io" target="_blank" rel="noopener noreferrer">@hamuzon</a>`
-        : `&copy; ${baseYear}${currentYear > baseYear ? "–" + currentYear : ""} Short Link`;
-      document.getElementById("copyright").innerHTML = footerHTML;
+      document.getElementById("copyright").innerHTML =
+        hostname === "hamuzon.github.io"
+          ? `&copy; ${baseYear}${currentYear > baseYear ? "–" + currentYear : ""} <a href="https://hamuzon.github.io" target="_blank" rel="noopener noreferrer">@hamuzon</a>`
+          : `&copy; ${baseYear}${currentYear > baseYear ? "–" + currentYear : ""} Short Link`;
 
       const form = document.getElementById("shortenForm");
       const shortUrlDisplay = document.getElementById("shortUrlDisplay");
@@ -78,13 +63,12 @@
       form.addEventListener("submit", (e) => {
         e.preventDefault();
         const code = form.code.value.trim();
-        if (!code) return alert("短縮コードを入力してください / Enter short code");
+        if(!code) return alert("短縮コードを入力してください / Enter short code");
 
-        // 実行場所ドメインの短縮リンク生成
-        const domain = window.location.hostname;
-        const shortLink = `#${encodeURIComponent(code)}`;
-        shortUrlLink.href = shortLink;
-        shortUrlLink.textContent = `https://${domain}/${code}`;
+        // 実行ドメインのパス + 短縮コード
+        const shortLink = `https://${hostname}/${code}`;
+        shortUrlLink.href = `https://link.hamusata.f5.si/${code}`; // クリックで元リンク
+        shortUrlLink.textContent = shortLink; // 表示は実行ドメインパス
         shortUrlDisplay.style.display = "block";
         resetBtn.style.display = "inline-block";
         copyMsg.textContent = "";
@@ -94,8 +78,8 @@
         if(shortUrlLink.href){
           navigator.clipboard.writeText(shortUrlLink.textContent).then(() => {
             copyMsg.textContent = "コピーしました！ / Copied!";
-            setTimeout(() => copyMsg.textContent = "", 3000);
-          }).catch(() => { copyMsg.textContent = "コピー失敗 / Copy failed"; });
+            setTimeout(() => copyMsg.textContent = "",3000);
+          }).catch(()=>{ copyMsg.textContent="コピー失敗 / Copy failed"; });
         }
       });
 
@@ -106,13 +90,15 @@
         copyMsg.textContent = "";
       });
 
-      // hash リダイレクト処理
-      function redirectIfHash(){
-        const code = decodeURIComponent(location.hash.slice(1));
-        if(code) window.location.href = `https://link.hamusata.f5.si/${code}`;
+      // hashでリダイレクト処理
+      function redirectIfPath(){
+        const pathCode = location.pathname.slice(1);
+        if(pathCode){
+          window.location.href = `https://link.hamusata.f5.si/${pathCode}`;
+        }
       }
-      window.addEventListener("hashchange", redirectIfHash);
-      redirectIfHash();
+      window.addEventListener("popstate", redirectIfPath);
+      redirectIfPath();
     });
   </script>
 </body>
