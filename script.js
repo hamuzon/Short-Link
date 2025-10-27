@@ -44,29 +44,21 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify({ url }),
       });
 
-      if (!res.ok) {
-        let errMsg = "エラーが発生しました / An error occurred";
-        try {
-          const errJson = await res.json();
-          if (errJson.error) errMsg = errJson.error;
-        } catch {}
-        errorText.textContent = errMsg;
+      const data = await res.json();
+
+      if (!res.ok || data.error) {
+        errorText.textContent = data.error || "エラーが発生しました / An error occurred";
         errorMessage.style.display = "";
         return;
       }
 
-      const data = await res.json();
+      if (data.shortCode && data.shortUrl) {
+        // 表示用 URL（現在のページ URL + ?url=shortCode）
+        const displayUrl = `${window.location.origin}${window.location.pathname}?url=${data.shortCode}`;
 
-      if (data.error) {
-        errorText.textContent = data.error;
-        errorMessage.style.display = "";
-      } else if (data.shortUrl) {
-        // 現在のサブパス＋ファイル名を取得
-        const currentPath = window.location.pathname.split('/').pop();
-        const displayUrl = `${window.location.origin}${window.location.pathname}?url=${data.shortCode || ""}`;
-
-        shortUrlLink.href = data.shortUrl; // コピーすると元の短縮リンク
-        shortUrlLink.textContent = displayUrl; // 表示は現在のサブパス＋?url=短縮コード
+        // 表示とコピーを分ける
+        shortUrlLink.href = data.shortUrl;      // コピー・クリックで実際の短縮リンク
+        shortUrlLink.textContent = displayUrl;  // 表示は現在のURL/?url=shortCode
         shortUrlDisplay.style.display = "";
         resetBtn.style.display = "";
       } else {
@@ -76,17 +68,20 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (err) {
       errorText.textContent = "通信エラーが発生しました / Network error occurred";
       errorMessage.style.display = "";
+      console.error(err);
     }
   });
 
   copyBtn.addEventListener("click", () => {
     if (shortUrlLink.href) {
-      navigator.clipboard.writeText(shortUrlLink.href).then(() => {
-        copyMsg.textContent = "コピーしました！ / Copied!";
-        setTimeout(() => (copyMsg.textContent = ""), 3000);
-      }).catch(() => {
-        copyMsg.textContent = "コピーに失敗しました / Copy failed";
-      });
+      navigator.clipboard.writeText(shortUrlLink.href)
+        .then(() => {
+          copyMsg.textContent = "コピーしました！ / Copied!";
+          setTimeout(() => (copyMsg.textContent = ""), 3000);
+        })
+        .catch(() => {
+          copyMsg.textContent = "コピーに失敗しました / Copy failed";
+        });
     }
   });
 
