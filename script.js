@@ -4,10 +4,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const hostname = window.location.hostname;
   const footer = document.getElementById("copyright");
 
+  // フッター表示
   footer.innerHTML = hostname === "hamuzon.github.io"
     ? `&copy; ${baseYear}${currentYear > baseYear ? "–" + currentYear : ""} <a class="link" href="https://hamuzon.github.io" target="_blank" rel="noopener noreferrer">@hamuzon</a>`
     : `&copy; ${baseYear}${currentYear > baseYear ? "–" + currentYear : ""} Short Link`;
 
+  // DOM要素取得
   const form = document.getElementById("shortenForm");
   const errorMessage = document.getElementById("errorMessage");
   const errorText = document.getElementById("errorText");
@@ -19,8 +21,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const API_ENDPOINT = "https://link.hamusata.f5.si/api/shorten";
 
+  // フォーム送信
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+
+    // 表示リセット
     errorMessage.style.display = "none";
     shortUrlDisplay.style.display = "none";
     resetBtn.style.display = "none";
@@ -50,25 +55,25 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      if (data.shortCode) {
-        // 現在のサブパス・ファイル名取得
-        const path = window.location.pathname.split("/").slice(0, -1).join("/") + "/";
-        const shortUrl = `${window.location.origin}${path}?url=${data.shortCode}`;
-
-        shortUrlLink.href = shortUrl;
-        shortUrlLink.textContent = shortUrl;
+      if (data.shortUrl) {
+        // 短縮URL表示
+        shortUrlLink.href = data.shortUrl;
+        shortUrlLink.textContent = data.shortUrl;
         shortUrlDisplay.style.display = "";
         resetBtn.style.display = "";
       } else {
         errorText.textContent = "不明なレスポンスです / Unknown response";
         errorMessage.style.display = "";
       }
+
     } catch (err) {
       errorText.textContent = "通信エラーが発生しました / Network error occurred";
       errorMessage.style.display = "";
+      console.error(err);
     }
   });
 
+  // Copyボタン
   copyBtn.addEventListener("click", () => {
     if (shortUrlLink.href) {
       navigator.clipboard.writeText(shortUrlLink.href)
@@ -82,6 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // リセットボタン
   resetBtn.addEventListener("click", () => {
     form.reset();
     shortUrlDisplay.style.display = "none";
@@ -90,6 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
     copyMsg.textContent = "";
   });
 
+  // 履歴書き換え（リロード時に ?url= が残らない）
   if (window.history.replaceState) {
     window.history.replaceState({}, document.title, window.location.pathname);
   }
