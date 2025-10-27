@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   const baseYear = 2025;
   const currentYear = new Date().getFullYear();
+
   const hostname = window.location.hostname;
+  const footer = document.getElementById("copyright");
   let footerHTML = "";
 
   if (hostname === "hamuzon.github.io") {
@@ -9,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     footerHTML = `&copy; ${baseYear}${currentYear > baseYear ? "–" + currentYear : ""} Short Link`;
   }
-  document.getElementById("copyright").innerHTML = footerHTML;
+  footer.innerHTML = footerHTML;
 
   const form = document.getElementById("shortenForm");
   const errorMessage = document.getElementById("errorMessage");
@@ -20,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const copyMsg = document.getElementById("copyMessage");
   const resetBtn = document.getElementById("resetButton");
 
-  // APIの完全URL
+  // APIの完全URL（ドメイン＋パス）
   const API_ENDPOINT = "https://link.hamusata.f5.si/api/shorten";
 
   form.addEventListener("submit", async (e) => {
@@ -60,13 +62,13 @@ document.addEventListener("DOMContentLoaded", () => {
       if (data.error) {
         errorText.textContent = data.error;
         errorMessage.style.display = "";
-      } else if (data.shortUrl) {
-        // 現在のサブパス＋ファイル名を取得
-        const currentPath = window.location.pathname.split('/').pop();
-        const displayUrl = `${window.location.origin}${window.location.pathname}?url=${data.shortCode || ""}`;
+      } else if (data.shortCode) {
+        // 現在のサブパス・ファイル名取得
+        const path = window.location.pathname.split("/").slice(0, -1).join("/") + "/";
+        const shortUrl = `${window.location.origin}${path}?url=${data.shortCode}`;
 
-        shortUrlLink.href = data.shortUrl; // コピーすると元の短縮リンク
-        shortUrlLink.textContent = displayUrl; // 表示は現在のサブパス＋?url=短縮コード
+        shortUrlLink.href = shortUrl;
+        shortUrlLink.textContent = shortUrl;
         shortUrlDisplay.style.display = "";
         resetBtn.style.display = "";
       } else {
@@ -82,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
   copyBtn.addEventListener("click", () => {
     if (shortUrlLink.href) {
       navigator.clipboard.writeText(shortUrlLink.href).then(() => {
-        copyMsg.textContent = "コピーしました！ / Copied!";
+        copyMsg.textContent = `コピーしました！ / Copied: ${shortUrlLink.href}`;
         setTimeout(() => (copyMsg.textContent = ""), 3000);
       }).catch(() => {
         copyMsg.textContent = "コピーに失敗しました / Copy failed";
