@@ -2,15 +2,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const baseYear = 2025;
   const currentYear = new Date().getFullYear();
   const hostname = window.location.hostname;
-  let footerHTML = "";
 
-  if (hostname === "hamuzon.github.io") {
-    footerHTML = `&copy; ${baseYear}${currentYear > baseYear ? "–" + currentYear : ""} <a class="link" href="https://hamuzon.github.io" target="_blank" rel="noopener noreferrer">@hamuzon</a>`;
-  } else {
-    footerHTML = `&copy; ${baseYear}${currentYear > baseYear ? "–" + currentYear : ""} Short Link`;
-  }
-  document.getElementById("copyright").innerHTML = footerHTML;
+  // フッター表示
+  const footer = document.getElementById("copyright");
+  footer.innerHTML = hostname === "hamuzon.github.io"
+    ? `&copy; ${baseYear}${currentYear > baseYear ? "–" + currentYear : ""} <a class="link" href="https://hamuzon.github.io" target="_blank" rel="noopener noreferrer">@hamuzon</a>`
+    : `&copy; ${baseYear}${currentYear > baseYear ? "–" + currentYear : ""} Short Link`;
 
+  // DOM要素取得
   const form = document.getElementById("shortenForm");
   const errorMessage = document.getElementById("errorMessage");
   const errorText = document.getElementById("errorText");
@@ -20,11 +19,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const copyMsg = document.getElementById("copyMessage");
   const resetBtn = document.getElementById("resetButton");
 
-  // APIの完全URL
   const API_ENDPOINT = "https://link.hamusata.f5.si/api/shorten";
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+
+    // 表示リセット
     errorMessage.style.display = "none";
     shortUrlDisplay.style.display = "none";
     resetBtn.style.display = "none";
@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       const data = await res.json();
+      console.log("API response:", data); // ←確認用
 
       if (!res.ok || data.error) {
         errorText.textContent = data.error || "エラーが発生しました / An error occurred";
@@ -57,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const displayUrl = `${window.location.origin}${window.location.pathname}?url=${data.shortCode}`;
 
         // 表示とコピーを分ける
-        shortUrlLink.href = data.shortUrl;      // コピー・クリックで実際の短縮リンク
+        shortUrlLink.href = data.shortUrl;      // コピー・クリックで短縮リンク
         shortUrlLink.textContent = displayUrl;  // 表示は現在のURL/?url=shortCode
         shortUrlDisplay.style.display = "";
         resetBtn.style.display = "";
@@ -65,26 +66,29 @@ document.addEventListener("DOMContentLoaded", () => {
         errorText.textContent = "不明なレスポンスです / Unknown response";
         errorMessage.style.display = "";
       }
+
     } catch (err) {
+      console.error(err);
       errorText.textContent = "通信エラーが発生しました / Network error occurred";
       errorMessage.style.display = "";
-      console.error(err);
     }
   });
 
+  // Copyボタン
   copyBtn.addEventListener("click", () => {
     if (shortUrlLink.href) {
       navigator.clipboard.writeText(shortUrlLink.href)
         .then(() => {
-          copyMsg.textContent = "コピーしました！ / Copied!";
+          copyMsg.textContent = `✅ コピーしました！ / Copied: ${shortUrlLink.href}`;
           setTimeout(() => (copyMsg.textContent = ""), 3000);
         })
         .catch(() => {
-          copyMsg.textContent = "コピーに失敗しました / Copy failed";
+          copyMsg.textContent = "❌ コピーに失敗しました / Copy failed";
         });
     }
   });
 
+  // リセットボタン
   resetBtn.addEventListener("click", () => {
     form.reset();
     shortUrlDisplay.style.display = "none";
@@ -93,6 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
     copyMsg.textContent = "";
   });
 
+  // 履歴書き換え（?url=が残らないように）
   if (window.history.replaceState) {
     window.history.replaceState({}, document.title, window.location.pathname);
   }
