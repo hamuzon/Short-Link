@@ -24,112 +24,21 @@
       line-height: 1.6;
       box-sizing: border-box;
     }
-    h1 {
-      text-align: center;
-      font-weight: 700;
-      font-size: 2.4rem;
-      color: var(--color-accent-light);
-      margin-bottom: 2rem;
-    }
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-top: 2rem;
-      background-color: rgba(255, 255, 255, 0.8);
-      padding: 1.5rem;
-      border-radius: 20px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-    }
-    input[type="url"] {
-      padding: 0.8rem;
-      font-size: 1.1rem;
-      border: 2px solid var(--color-accent-light);
-      border-radius: 16px;
-      width: 100%;
-      box-sizing: border-box;
-      transition: all 0.3s ease;
-    }
-    input::placeholder {
-      color: #a66a5a;
-      font-style: italic;
-    }
-    input:focus {
-      border-color: var(--color-button-bg-light);
-      background-color: #fff4f6;
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(179,74,47,0.2);
-    }
-    button {
-      padding: 0.85rem 1.5rem;
-      font-size: 1.1rem;
-      background-color: var(--color-button-bg-light);
-      color: var(--color-accent-light);
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: 700;
-      box-shadow: 1px 4px 8px rgba(179,74,47,0.5);
-      transition: all 0.3s ease;
-      width: 100%;
-    }
-    button:hover {
-      background-color: var(--color-button-hover-light);
-      color: white;
-      transform: translateY(-2px);
-      box-shadow: 1px 6px 12px rgba(179,74,47,0.6);
-    }
-    .secondary-button {
-      background-color: transparent;
-      color: var(--color-accent-light);
-      border: 2px dashed var(--color-accent-light);
-      box-shadow: none;
-    }
-    .secondary-button:hover {
-      background-color: #ffe9ec;
-      color: var(--color-accent-light);
-      transform: translateY(0);
-      box-shadow: none;
-    }
-    p {
-      margin-top: 1.8rem;
-      font-size: 1.15rem;
-      background-color: #ffe4e6;
-      padding: 1.1rem;
-      border-left: 10px solid var(--color-accent-light);
-      border-radius: 10px;
-      word-break: break-word;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-    }
-    #copyButton {
-      margin-top: 0.7rem;
-      padding: 0.5rem 1rem;
-      font-size: 0.95rem;
-      border-radius: 12px;
-      width: auto;
-      display: inline-block;
-      box-shadow: 0 2px 4px rgba(179,74,47,0.3);
-    }
-    #copyMessage {
-      margin-left: 1em;
-      color: green;
-      font-weight: bold;
-      font-size: 0.9em;
-    }
-    a {
-      color: var(--color-accent-light);
-      text-decoration: none;
-      font-weight: bold;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    footer {
-      text-align: center;
-      margin-top: 3rem;
-      color: var(--color-accent-light);
-      font-size: 0.9rem;
-    }
+    h1 { text-align: center; font-weight: 700; font-size: 2.4rem; color: var(--color-accent-light); margin-bottom: 2rem; }
+    form { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; background-color: rgba(255, 255, 255, 0.8); padding: 1.5rem; border-radius: 20px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
+    input[type="url"] { padding: 0.8rem; font-size: 1.1rem; border: 2px solid var(--color-accent-light); border-radius: 16px; width: 100%; box-sizing: border-box; transition: all 0.3s ease; }
+    input::placeholder { color: #a66a5a; font-style: italic; }
+    input:focus { border-color: var(--color-button-bg-light); background-color: #fff4f6; outline: none; box-shadow: 0 0 0 3px rgba(179,74,47,0.2); }
+    button { padding: 0.85rem 1.5rem; font-size: 1.1rem; background-color: var(--color-button-bg-light); color: var(--color-accent-light); border: none; border-radius: 20px; cursor: pointer; font-weight: 700; box-shadow: 1px 4px 8px rgba(179,74,47,0.5); transition: all 0.3s ease; width: 100%; }
+    button:hover { background-color: var(--color-button-hover-light); color: white; transform: translateY(-2px); box-shadow: 1px 6px 12px rgba(179,74,47,0.6); }
+    .secondary-button { background-color: transparent; color: var(--color-accent-light); border: 2px dashed var(--color-accent-light); box-shadow: none; }
+    .secondary-button:hover { background-color: #ffe9ec; color: var(--color-accent-light); transform: translateY(0); box-shadow: none; }
+    p { margin-top: 1.8rem; font-size: 1.15rem; background-color: #ffe4e6; padding: 1.1rem; border-left: 10px solid var(--color-accent-light); border-radius: 10px; word-break: break-word; box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
+    #copyButton { margin-top: 0.7rem; padding: 0.5rem 1rem; font-size: 0.95rem; border-radius: 12px; width: auto; display: inline-block; box-shadow: 0 2px 4px rgba(179,74,47,0.3); }
+    #copyMessage { margin-left: 1em; color: green; font-weight: bold; font-size: 0.9em; }
+    a { color: var(--color-accent-light); text-decoration: none; font-weight: bold; }
+    a:hover { text-decoration: underline; }
+    footer { text-align: center; margin-top: 3rem; color: var(--color-accent-light); font-size: 0.9rem; }
     @media (prefers-color-scheme: dark) {
       body { background-color: #1b1b1b; color: #f0e9e0; }
       h1 { color: #f2c9b3; text-shadow: 1px 1px 0 #392f2a; }
@@ -188,7 +97,6 @@
 
       const hostname = window.location.hostname;
       let footerHTML = "";
-
       if (hostname === "hamuzon.github.io") {
         footerHTML = `&copy; ${baseYear}${currentYear > baseYear ? "–" + currentYear : ""} <a class="link" href="https://hamuzon.github.io" target="_blank" rel="noopener noreferrer">@hamuzon</a>`;
       } else {
@@ -205,16 +113,8 @@
       const copyMsg = document.getElementById("copyMessage");
       const resetBtn = document.getElementById("resetButton");
 
+      // APIの完全URL
       const API_ENDPOINT = "https://link.hamusata.f5.si/api/shorten";
-
-      // URL パラメータ ?url=短縮コード があれば自動リダイレクト
-      const urlParams = new URLSearchParams(window.location.search);
-      const shortCode = urlParams.get("url");
-      if (shortCode) {
-        const redirectUrl = `https://link.hamusata.f5.si/${shortCode}`;
-        window.location.href = redirectUrl;
-        return; // 以降処理は中断
-      }
 
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -249,13 +149,18 @@
           }
 
           const data = await res.json();
-
           if (data.error) {
             errorText.textContent = data.error;
             errorMessage.style.display = "";
           } else if (data.shortUrl) {
-            shortUrlLink.href = data.shortUrl;
-            shortUrlLink.textContent = data.shortUrl;
+            // 現在のサブパス＋ファイル名を取得
+            let currentPath = window.location.pathname;
+            if (currentPath.endsWith("index.html")) currentPath = currentPath.replace(/index\.html$/, "");
+
+            const displayLink = `${window.location.origin}${currentPath}?url=${data.shortCode}`;
+
+            shortUrlLink.href = data.shortUrl; // 元の短縮リンク
+            shortUrlLink.textContent = displayLink; // 表示は GitHub Pages URL
             shortUrlDisplay.style.display = "";
             resetBtn.style.display = "";
           } else {
@@ -286,6 +191,19 @@
         errorMessage.style.display = "none";
         copyMsg.textContent = "";
       });
+
+      // ?url=短縮コード がある場合も表示
+      const urlParams = new URLSearchParams(window.location.search);
+      const shortCode = urlParams.get("url");
+      if (shortCode) {
+        let currentPath = window.location.pathname;
+        if (currentPath.endsWith("index.html")) currentPath = currentPath.replace(/index\.html$/, "");
+        const displayLink = `${window.location.origin}${currentPath}?url=${shortCode}`;
+        shortUrlLink.href = `https://link.hamusata.f5.si/${shortCode}`;
+        shortUrlLink.textContent = displayLink;
+        shortUrlDisplay.style.display = "";
+        resetBtn.style.display = "";
+      }
 
       if (window.history.replaceState) {
         window.history.replaceState({}, document.title, window.location.pathname);
