@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8" />
-<title>ショートリンク作成サービス / Short Link Generator</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="icon" href="https://home.hamusata.f5.si/icon.svg" type="image/svg+xml" />
-<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8" />
+  <title>ショートリンク作成サービス / Short Link Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="https://home.hamusata.f5.si/icon.svg" type="image/svg+xml" />
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet" />
   <style>
     :root {
       --color-bg-light: #fff0f6;
@@ -131,216 +131,166 @@
       font-size: 0.9rem;
     }
     @media (prefers-color-scheme: dark) {
-      body {
-        background-color: #1b1b1b;
-        color: #f0e9e0;
-      }
-      h1 {
-        color: #f2c9b3;
-        text-shadow: 1px 1px 0 #392f2a;
-      }
-      form {
-        background-color: rgba(27,27,27,0.8);
-        box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-      }
-      input {
-        border-color: #f2c9b3;
-        background-color: #2a2723;
-        color: #f0e9e0;
-      }
-      input::placeholder {
-        color: #8c7f75;
-      }
-      input:focus {
-        border-color: #b75a42;
-        background-color: #3a372f;
-        box-shadow: 0 0 0 3px rgba(242,201,179,0.2);
-      }
-      button {
-        background-color: #b75a42;
-        color: #1b1b1b;
-        box-shadow: 1px 4px 8px rgba(242,201,179,0.5);
-      }
-      button:hover {
-        background-color: #d1734f;
-        box-shadow: 1px 6px 12px rgba(242,201,179,0.6);
-      }
-      .secondary-button {
-        border-color: #f2c9b3;
-        color: #f2c9b3;
-      }
-      .secondary-button:hover {
-        background-color: #2f2f2f;
-      }
-      p {
-        background-color: #4b3f3b;
-        border-left-color: #f2c9b3;
-        color: #f0e9e0;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      }
-      #copyButton {
-        box-shadow: 0 2px 4px rgba(242,201,179,0.3);
-      }
-      a {
-        color: #f2c9b3;
-      }
-      footer {
-        color: #f2c9b3;
-      }
+      body { background-color: #1b1b1b; color: #f0e9e0; }
+      h1 { color: #f2c9b3; text-shadow: 1px 1px 0 #392f2a; }
+      form { background-color: rgba(27,27,27,0.8); box-shadow: 0 8px 16px rgba(0,0,0,0.3); }
+      input { border-color: #f2c9b3; background-color: #2a2723; color: #f0e9e0; }
+      input::placeholder { color: #8c7f75; }
+      input:focus { border-color: #b75a42; background-color: #3a372f; box-shadow: 0 0 0 3px rgba(242,201,179,0.2); }
+      button { background-color: #b75a42; color: #1b1b1b; box-shadow: 1px 4px 8px rgba(242,201,179,0.5); }
+      button:hover { background-color: #d1734f; box-shadow: 1px 6px 12px rgba(242,201,179,0.6); }
+      .secondary-button { border-color: #f2c9b3; color: #f2c9b3; }
+      .secondary-button:hover { background-color: #2f2f2f; }
+      p { background-color: #4b3f3b; border-left-color: #f2c9b3; color: #f0e9e0; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+      #copyButton { box-shadow: 0 2px 4px rgba(242,201,179,0.3); }
+      a { color: #f2c9b3; }
+      footer { color: #f2c9b3; }
     }
     @media (max-width: 768px) {
-      body {
-        padding: 1rem;
-      }
-      h1 {
-        font-size: 2rem;
-      }
-      form {
-        padding: 1rem;
-      }
-      button {
-        padding: 0.75rem 1rem;
-        font-size: 1rem;
-      }
-      p {
-        font-size: 1rem;
-        padding: 0.8rem;
-      }
+      body { padding: 1rem; }
+      h1 { font-size: 2rem; }
+      form { padding: 1rem; }
+      button { padding: 0.75rem 1rem; font-size: 1rem; }
+      p { font-size: 1rem; padding: 0.8rem; }
     }
   </style>
-</style>
 </head>
 <body>
-<h1>🔗 ショートリンク作成サービス / Short Link Generator 🔗</h1>
+  <h1>🔗 ショートリンク作成サービス / Short Link Generator 🔗</h1>
 
-<form id="shortenForm" autocomplete="off" spellcheck="false">
-<input type="url" name="url" placeholder="https://example.com" required aria-label="URLを入力してください / Enter URL" />
-<button type="submit">短縮URLを作成 / Create Short URL</button>
-<button type="button" id="resetButton" class="secondary-button" style="display:none;">🔄 リセット / Reset</button>
-</form>
+  <form id="shortenForm" autocomplete="off" spellcheck="false">
+    <input type="url" name="url" placeholder="https://example.com" required aria-label="URLを入力してください / Enter URL" />
+    <button type="submit">短縮URLを作成 / Create Short URL</button>
+    <button type="button" id="resetButton" class="secondary-button" style="display:none;">🔄 リセット / Reset</button>
+  </form>
 
-<p id="errorMessage" style="color: red; font-weight: bold; text-align: center; margin-top: 1rem; display:none;">
-⚠️ <span id="errorText"></span>
-</p>
+  <p id="errorMessage" style="color: red; font-weight: bold; text-align: center; margin-top: 1rem; display:none;">
+    ⚠️ <span id="errorText"></span>
+  </p>
 
-<p style="color: var(--color-accent-light); font-weight: 700; text-align: center; margin-top: 1rem; line-height: 1.4;">
-⚠️ 危険なリンクは管理者の判断で削除される場合があります。<br />
-⚠️ Dangerous links may be removed at the administrator's discretion.
-</p>
+  <p style="color: var(--color-accent-light); font-weight: 700; text-align: center; margin-top: 1rem; line-height: 1.4;">
+    ⚠️ 危険なリンクは管理者の判断で削除される場合があります。<br />
+    ⚠️ Dangerous links may be removed at the administrator's discretion.
+  </p>
 
-<p id="shortUrlDisplay" style="display:none; text-align:center;">
-✅ 短縮URL / Short URL: <a id="shortUrlLink" href="#" target="_blank" rel="noopener"></a><br />
-<button id="copyButton">📋 コピー / Copy</button>
-<span id="copyMessage" aria-live="polite"></span>
-</p>
+  <p id="shortUrlDisplay" style="display:none; text-align:center;">
+    ✅ 短縮URL / Short URL: <a id="shortUrlLink" href="#" target="_blank" rel="noopener"></a><br />
+    <button id="copyButton">📋 コピー / Copy</button>
+    <span id="copyMessage" aria-live="polite"></span>
+  </p>
 
-<footer id="copyright" aria-label="著作権表示 / Copyright"></footer>
+  <footer id="copyright" aria-label="著作権表示 / Copyright"></footer>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const baseYear = 2025;
-  const currentYear = new Date().getFullYear();
-  const hostname = window.location.hostname;
-  let footerHTML = "";
-  if (hostname === "hamuzon.github.io") {
-    footerHTML = `&copy; ${baseYear}${currentYear>baseYear?"–"+currentYear:""} <a class="link" href="https://hamuzon.github.io" target="_blank" rel="noopener noreferrer">@hamuzon</a>`;
-  } else {
-    footerHTML = `&copy; ${baseYear}${currentYear>baseYear?"–"+currentYear:""} Short Link`;
-  }
-  document.getElementById("copyright").innerHTML = footerHTML;
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const baseYear = 2025;
+      const currentYear = new Date().getFullYear();
 
-  const form = document.getElementById("shortenForm");
-  const errorMessage = document.getElementById("errorMessage");
-  const errorText = document.getElementById("errorText");
-  const shortUrlDisplay = document.getElementById("shortUrlDisplay");
-  const shortUrlLink = document.getElementById("shortUrlLink");
-  const copyBtn = document.getElementById("copyButton");
-  const copyMsg = document.getElementById("copyMessage");
-  const resetBtn = document.getElementById("resetButton");
+      const hostname = window.location.hostname;
+      let footerHTML = "";
 
-  const API_ENDPOINT = "https://link.hamusata.f5.si/api/shorten";
+      if (hostname === "hamuzon.github.io") {
+        footerHTML = `&copy; ${baseYear}${currentYear > baseYear ? "–" + currentYear : ""} <a class="link" href="https://hamuzon.github.io" target="_blank" rel="noopener noreferrer">@hamuzon</a>`;
+      } else {
+        footerHTML = `&copy; ${baseYear}${currentYear > baseYear ? "–" + currentYear : ""} Short Link`;
+      }
+      document.getElementById("copyright").innerHTML = footerHTML;
 
-  // --- 自動リダイレクト処理 ---
-  const pathParts = window.location.pathname.split('/');
-  const shortCode = pathParts[pathParts.length - 1] || "";
-  if (shortCode) {
-    const redirectUrl = `https://link.hamusata.f5.si/${shortCode}`;
-    window.location.href = redirectUrl;
-  }
+      const form = document.getElementById("shortenForm");
+      const errorMessage = document.getElementById("errorMessage");
+      const errorText = document.getElementById("errorText");
+      const shortUrlDisplay = document.getElementById("shortUrlDisplay");
+      const shortUrlLink = document.getElementById("shortUrlLink");
+      const copyBtn = document.getElementById("copyButton");
+      const copyMsg = document.getElementById("copyMessage");
+      const resetBtn = document.getElementById("resetButton");
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    errorMessage.style.display = "none";
-    shortUrlDisplay.style.display = "none";
-    resetBtn.style.display = "none";
-    copyMsg.textContent = "";
+      const API_ENDPOINT = "https://link.hamusata.f5.si/api/shorten";
 
-    const url = form.url.value.trim();
-    if (!url) {
-      errorText.textContent = "URLを入力してください / Please enter a URL";
-      errorMessage.style.display = "";
-      return;
-    }
+      // URL パラメータ ?url=短縮コード があれば自動リダイレクト
+      const urlParams = new URLSearchParams(window.location.search);
+      const shortCode = urlParams.get("url");
+      if (shortCode) {
+        const redirectUrl = `https://link.hamusata.f5.si/${shortCode}`;
+        window.location.href = redirectUrl;
+        return; // 以降処理は中断
+      }
 
-    try {
-      const res = await fetch(API_ENDPOINT, {
-        method: "POST",
-        headers: {"Content-Type":"application/json"},
-        body: JSON.stringify({url}),
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        errorMessage.style.display = "none";
+        shortUrlDisplay.style.display = "none";
+        resetBtn.style.display = "none";
+        copyMsg.textContent = "";
+
+        const url = form.url.value.trim();
+        if (!url) {
+          errorText.textContent = "URLを入力してください / Please enter a URL";
+          errorMessage.style.display = "";
+          return;
+        }
+
+        try {
+          const res = await fetch(API_ENDPOINT, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ url }),
+          });
+
+          if (!res.ok) {
+            let errMsg = "エラーが発生しました / An error occurred";
+            try {
+              const errJson = await res.json();
+              if (errJson.error) errMsg = errJson.error;
+            } catch {}
+            errorText.textContent = errMsg;
+            errorMessage.style.display = "";
+            return;
+          }
+
+          const data = await res.json();
+
+          if (data.error) {
+            errorText.textContent = data.error;
+            errorMessage.style.display = "";
+          } else if (data.shortUrl) {
+            shortUrlLink.href = data.shortUrl;
+            shortUrlLink.textContent = data.shortUrl;
+            shortUrlDisplay.style.display = "";
+            resetBtn.style.display = "";
+          } else {
+            errorText.textContent = "不明なレスポンスです / Unknown response";
+            errorMessage.style.display = "";
+          }
+        } catch (err) {
+          errorText.textContent = "通信エラーが発生しました / Network error occurred";
+          errorMessage.style.display = "";
+        }
       });
 
-      if (!res.ok) {
-        let errMsg = "エラーが発生しました / An error occurred";
-        try {
-          const errJson = await res.json();
-          if (errJson.error) errMsg = errJson.error;
-        } catch {}
-        errorText.textContent = errMsg;
-        errorMessage.style.display = "";
-        return;
+      copyBtn.addEventListener("click", () => {
+        if (shortUrlLink.href) {
+          navigator.clipboard.writeText(shortUrlLink.href).then(() => {
+            copyMsg.textContent = "コピーしました！ / Copied!";
+            setTimeout(() => (copyMsg.textContent = ""), 3000);
+          }).catch(() => {
+            copyMsg.textContent = "コピーに失敗しました / Copy failed";
+          });
+        }
+      });
+
+      resetBtn.addEventListener("click", () => {
+        form.reset();
+        shortUrlDisplay.style.display = "none";
+        resetBtn.style.display = "none";
+        errorMessage.style.display = "none";
+        copyMsg.textContent = "";
+      });
+
+      if (window.history.replaceState) {
+        window.history.replaceState({}, document.title, window.location.pathname);
       }
-
-      const data = await res.json();
-      if (data.error) {
-        errorText.textContent = data.error;
-        errorMessage.style.display = "";
-      } else if (data.code) {
-        const shortUrl = `https://link.hamusata.f5.si/${data.code}`;
-        shortUrlLink.href = shortUrl;
-        shortUrlLink.textContent = shortUrl;
-        shortUrlDisplay.style.display = "";
-        resetBtn.style.display = "";
-      } else {
-        errorText.textContent = "不明なレスポンスです / Unknown response";
-        errorMessage.style.display = "";
-      }
-    } catch (err) {
-      errorText.textContent = "通信エラーが発生しました / Network error occurred";
-      errorMessage.style.display = "";
-    }
-  });
-
-  copyBtn.addEventListener("click", () => {
-    if (shortUrlLink.href) {
-      navigator.clipboard.writeText(shortUrlLink.href).then(() => {
-        copyMsg.textContent = "コピーしました！ / Copied!";
-        setTimeout(()=>copyMsg.textContent="",3000);
-      }).catch(()=>{copyMsg.textContent="コピーに失敗しました / Copy failed";});
-    }
-  });
-
-  resetBtn.addEventListener("click", () => {
-    form.reset();
-    shortUrlDisplay.style.display = "none";
-    resetBtn.style.display = "none";
-    errorMessage.style.display = "none";
-    copyMsg.textContent = "";
-  });
-
-  if(window.history.replaceState){
-    window.history.replaceState({}, document.title, window.location.pathname);
-  }
-});
-</script>
+    });
+  </script>
 </body>
 </html>
