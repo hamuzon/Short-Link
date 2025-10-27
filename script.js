@@ -55,9 +55,11 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       if (data.shortCode) {
-        // バックエンドの短縮URLを直接使用
-        const shortUrl = `https://link.hamusata.f5.si/${data.shortCode}`;
+        // ✅ 現在のサブパス・ファイル名取得
+        const path = window.location.pathname.split("/").slice(0, -1).join("/") + "/";
+        const shortUrl = `${window.location.origin}${path}?url=${data.shortCode}`;
 
+        // 短縮URL表示
         shortUrlLink.href = shortUrl;
         shortUrlLink.textContent = shortUrl;
         shortUrlDisplay.style.display = "";
