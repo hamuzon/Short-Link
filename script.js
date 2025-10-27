@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       const data = await res.json();
-      console.log("API response:", data); // ←確認用
+      console.log("API response:", data); // 確認用
 
       if (!res.ok || data.error) {
         errorText.textContent = data.error || "エラーが発生しました / An error occurred";
@@ -53,13 +53,13 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      if (data.shortCode && data.shortUrl) {
-        // 表示用 URL（現在のページ URL + ?url=shortCode）
-        const displayUrl = `${window.location.origin}${window.location.pathname}?url=${data.shortCode}`;
+      if (data.shortcode && data.shortUrl) {
+        // 表示用 URL（現在のページ URL + ?url=shortcode）
+        const displayUrl = `${window.location.origin}${window.location.pathname}?url=${data.shortcode}`;
 
-        // 表示とコピーを分ける
+        // 表示とコピー
         shortUrlLink.href = data.shortUrl;      // コピー・クリックで短縮リンク
-        shortUrlLink.textContent = displayUrl;  // 表示は現在のURL/?url=shortCode
+        shortUrlLink.textContent = displayUrl;  // 表示は現在のURL/?url=shortcode
         shortUrlDisplay.style.display = "";
         resetBtn.style.display = "";
       } else {
@@ -79,11 +79,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (shortUrlLink.href) {
       navigator.clipboard.writeText(shortUrlLink.href)
         .then(() => {
-          copyMsg.textContent = `✅ コピーしました！ / Copied: ${shortUrlLink.href}`;
+          copyMsg.textContent = "コピーしました！ / Copied!";
           setTimeout(() => (copyMsg.textContent = ""), 3000);
         })
         .catch(() => {
-          copyMsg.textContent = "❌ コピーに失敗しました / Copy failed";
+          copyMsg.textContent = "コピーに失敗しました / Copy failed";
         });
     }
   });
