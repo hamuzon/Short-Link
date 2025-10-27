@@ -21,6 +21,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const API_ENDPOINT = "https://link.hamusata.f5.si/api/shorten";
 
+  // --- 自動リダイレクト処理 ---
+  const urlParams = new URLSearchParams(window.location.search);
+  const shortcodeParam = urlParams.get("url");
+  if (shortcodeParam) {
+    const redirectUrl = `https://link.hamusata.f5.si/${shortcodeParam}`;
+    window.location.href = redirectUrl;
+    return; // 以降のスクリプトは処理しない
+  }
+
+  // --- 短縮URL作成フォーム ---
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -75,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Copyボタン（表示されている URL をコピー）
+  // Copyボタン
   copyBtn.addEventListener("click", () => {
     const displayText = shortUrlLink.textContent;
     if (displayText) {
@@ -99,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
     copyMsg.textContent = "";
   });
 
-  // ?url= が残らないように履歴書き換え
+  // 履歴書き換え（?url=が残らないように）
   if (window.history.replaceState) {
     window.history.replaceState({}, document.title, window.location.pathname);
   }
