@@ -13,6 +13,7 @@
 
   <form id="shortenForm" autocomplete="off" spellcheck="false">
     <input type="url" name="url" placeholder="https://example.com" required aria-label="URLを入力してください / Enter URL" />
+    <input type="text" name="customPath" placeholder="カスタムパス（任意） / Custom Path (optional)" aria-label="カスタムパス / Custom Path"/>
     <button type="submit">短縮URLを作成 / Create Short URL</button>
     <button type="button" id="resetButton" class="secondary-button" style="display:none;">🔄 リセット / Reset</button>
   </form>
@@ -21,15 +22,15 @@
     ⚠️ <span id="errorText"></span>
   </p>
 
-  <p style="color: var(--color-accent-light); font-weight: 700; text-align: center; margin-top: 1rem; line-height: 1.4;">
-    ⚠️ 危険なリンクは管理者の判断で削除される場合があります。<br />
-    ⚠️ Dangerous links may be removed at the administrator's discretion.
-  </p>
-
   <p id="shortUrlDisplay" style="display:none; text-align:center;">
     ✅ 短縮URL / Short URL: <a id="shortUrlLink" href="#" target="_blank" rel="noopener"></a><br />
     <button id="copyButton">📋 コピー / Copy</button>
     <span id="copyMessage" aria-live="polite"></span>
+  </p>
+
+  <p style="color: var(--color-accent-light); font-weight: 700; text-align: center; margin-top: 1rem; line-height: 1.4;">
+    ⚠️ 危険なリンクは管理者の判断で削除される場合があります。<br />
+    ⚠️ Dangerous links may be removed at the administrator's discretion.
   </p>
 
   <footer id="copyright" aria-label="著作権表示 / Copyright"></footer>
