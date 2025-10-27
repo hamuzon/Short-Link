@@ -32,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
     copyMsg.textContent = "";
 
     const url = form.url.value.trim();
-    const customPath = form.customPath.value.trim();
 
     if (!url) {
       errorText.textContent = "URLを入力してください / Please enter a URL";
@@ -44,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const res = await fetch(API_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url, customPath }),
+        body: JSON.stringify({ url }),
       });
 
       const data = await res.json();
@@ -55,10 +54,13 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      if (data.shortUrl) {
-        // 短縮URL表示
-        shortUrlLink.href = data.shortUrl;
-        shortUrlLink.textContent = data.shortUrl;
+      if (data.shortCode) {
+        // 現在のサブパス・ファイル名取得
+        const path = window.location.pathname.split("/").slice(0, -1).join("/") + "/";
+        const shortUrl = `${window.location.origin}${path}?url=${data.shortCode}`;
+
+        shortUrlLink.href = shortUrl;
+        shortUrlLink.textContent = shortUrl;
         shortUrlDisplay.style.display = "";
         resetBtn.style.display = "";
       } else {
