@@ -23,8 +23,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- 自動リダイレクト処理 ---
   const urlParams = new URLSearchParams(window.location.search);
-  const shortcodeParam = urlParams.get("url");
-  if (shortcodeParam) {
+  const youtubeId = urlParams.get("v"); // YouTube ID があるかチェック
+  const shortcodeParam = urlParams.get("url"); // 短縮URL用
+
+  if (youtubeId) {
+    // youtu.be 形式にリダイレクト
+    window.location.href = `https://youtu.be/${youtubeId}`;
+    return; // 以降のスクリプトは処理しない
+  } else if (shortcodeParam) {
     const redirectUrl = `https://link.hamusata.f5.si/${shortcodeParam}`;
     window.location.href = redirectUrl;
     return; // 以降のスクリプトは処理しない
@@ -66,10 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // 表示用 URL（現在のページ URL + ?url=shortcode）
         const displayUrl = `${window.location.origin}${window.location.pathname}?url=${data.shortcode}`;
 
-        // 表示は displayUrl
         shortUrlLink.textContent = displayUrl;
-
-        // クリックで短縮URLに移動
         shortUrlLink.href = data.shortUrl;
 
         shortUrlDisplay.style.display = "";
