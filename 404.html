@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>404 - Not Found / 見つかりません</title>
+  <link rel="icon" href="favicon.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --color-bg-light: #fff0f6;
+      --color-text-light: #3b1f2b;
+      --color-accent-light: #b34a2f;
+      --color-button-bg-light: #f6c6c1;
+      --color-button-hover-light: #f7a6a2;
+      --radius: 20px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      width: 100%;
+      font-family: 'M PLUS Rounded 1c', 'Comic Neue', cursive, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-light);
+      text-align: center;
+      padding: 20px;
+      background: var(--color-bg-light);
+      line-height: 1.6;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2.2rem 1.8rem;
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid #f3cfd8;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 9vw, 4.4rem);
+      margin-bottom: 0.25em;
+      letter-spacing: 0.02em;
+      color: var(--color-accent-light);
+    }
+
+    p {
+      font-size: 1.03rem;
+      margin: 0.4em 0;
+      color: var(--color-text-light);
+    }
+
+    .subtext {
+      font-size: 0.92rem;
+      color: #7d4c43;
+      margin-top: 0.35em;
+    }
+
+    a.back {
+      display: inline-block;
+      margin-top: 1.8rem;
+      padding: 0.85rem 1.8rem;
+      font-size: 1rem;
+      background-color: var(--color-button-bg-light);
+      color: var(--color-accent-light);
+      text-decoration: none;
+      border-radius: 20px;
+      font-weight: bold;
+      border: none;
+      box-shadow: 1px 4px 8px rgba(179, 74, 47, 0.5);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    a.back:hover {
+      background-color: var(--color-button-hover-light);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 1px 6px 12px rgba(179, 74, 47, 0.6);
+    }
+
+    footer {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: var(--color-accent-light);
+      user-select: none;
+    }
+
+    a.link {
+      color: var(--color-accent-light);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a.link:hover {
+      text-decoration: underline;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #1b1b1b;
+        color: #f0e9e0;
+      }
+
+      .wrapper {
+        background-color: rgba(27, 27, 27, 0.8);
+        border-color: #392f2a;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      }
+
+      h1 {
+        color: #f2c9b3;
+        text-shadow: 1px 1px 0 #392f2a;
+      }
+
+      p {
+        color: #f0e9e0;
+      }
+
+      .subtext {
+        color: #c4afa2;
+      }
+
+      a.back {
+        background-color: #b75a42;
+        color: #1b1b1b;
+        box-shadow: 1px 4px 8px rgba(242, 201, 179, 0.5);
+      }
+
+      a.back:hover {
+        background-color: #d1734f;
+        box-shadow: 1px 6px 12px rgba(242, 201, 179, 0.6);
+      }
+
+      footer,
+      a.link {
+        color: #f2c9b3;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .wrapper {
+        padding: 1.8rem 1rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <h1>404 - error</h1>
+    <p>エラーが発生しました: 見つかりません / Not Found</p>
+    <p class="subtext">Sorry, Not Found.</p>
+    <a id="backLink" class="back" href="/">トップページへ戻る / Back to Home</a>
+
+    <footer id="footer-copy"></footer>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (location.hostname === 'hamuzon.github.io') {
+        document.getElementById('backLink').href = 'https://hamuzon.github.io/Short-Link/';
+      }
+    });
+
+    (() => {
+      const footer = document.getElementById('footer-copy');
+      if (!footer) return;
+
+      const baseYear = 2025;
+      const currentYear = new Date().getFullYear();
+      const hostname = location.hostname;
+      const yearString = `${baseYear}${currentYear > baseYear ? '–' + currentYear : ''}`;
+
+      footer.innerHTML = hostname === 'hamuzon.github.io'
+        ? `&copy; ${yearString} <a class="link" href="https://hamuzon.github.io" target="_blank" rel="noopener noreferrer">@hamuzon</a>`
+        : `&copy; ${yearString} Short Link`;
+    })();
+  </script>
+</body>
+</html>
