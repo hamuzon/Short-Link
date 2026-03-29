@@ -94,6 +94,7 @@
       margin-top: 2rem;
       font-size: 0.9rem;
       color: var(--color-accent-light);
+      -webkit-user-select: none;
       user-select: none;
     }
 
@@ -171,6 +172,14 @@
   </div>
 
   <script>
+    // README/LICENSE へのアクセス（大文字小文字問わず）を判定してリダイレクト
+    (function() {
+      const path = window.location.pathname.toLowerCase();
+      if (path.includes('readme') || path.includes('license')) {
+        window.location.replace('./');
+      }
+    })();
+
     document.addEventListener('DOMContentLoaded', () => {
       if (location.hostname === 'hamuzon.github.io') {
         document.getElementById('backLink').href = 'https://hamuzon.github.io/Short-Link/';
